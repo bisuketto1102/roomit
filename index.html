@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roomit</title>
+<meta name="apple-mobile-web-app-title" content="Roomit">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#F2F2F7">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F2F2F7;
+       font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;color:#14213D}
+  .box{text-align:center;padding:24px 16px;max-width:340px}
+  img{width:96px;height:96px;border-radius:22px}
+  h1{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:14px 0 22px}
+  a.go{display:block;background:#14213D;color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:15px;border-radius:14px}
+  p{font-size:14px;color:#5B6478;line-height:1.7;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="apple-touch-icon.png" alt="">
+  <h1>Roomit</h1>
+  <a class="go" id="go" href="#">開く</a>
+  <p>ホーム画面に置くには：<br>下の共有ボタン →「ホーム画面に追加」</p>
+</div>
+<script>
+  // ?p=admin を付けて追加すれば管理画面の入口になる
+  var EXEC = 'https://script.google.com/macros/s/AKfycbwe8iRnxnAubyP87KDqIMHQ7J09XLbSbEBF0ZHDKnRpKcjR7bTcuudF9-IB2aVkbdTs/exec';
+  var p = new URLSearchParams(location.search).get('p');
+  var url = EXEC + (p === 'admin' ? '?p=admin' : '');
+  document.getElementById('go').href = url;
+  // ホーム画面から開いたときだけ、すぐ本体へ
+  if (navigator.standalone || matchMedia('(display-mode: standalone)').matches) location.replace(url);
+</script>
+</body>
+</html>
